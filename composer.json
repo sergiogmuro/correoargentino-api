@@ -6,7 +6,7 @@
     "php": ">=7.0",
     "ext-curl": "*"
   },
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "version": "0.1.1",
   "license": "MIT",
   "authors": [
@@ -15,12 +15,12 @@
     }
   ],
   "autoload": {
-    "classmap": [
-      "CorreoArgentinoAPI"
-    ],
     "psr-4": {
-      "CorreoArgentinoApi\\": "CorreoArgentinoAPI/"
+      "CorreoArgentinoApi\\": ""
     }
+  },
+  "config": {
+    "sort-packages": true
   },
   "prefer-stable": true
 }

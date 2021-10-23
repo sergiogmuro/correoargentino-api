@@ -8,6 +8,8 @@ composer require sergiomuro/correoargentino-api
 
 ### Make Request
 ```php
+use App\CorreoArgentinoApi\CorreoArgentino;
+
 $api = (new CorreoArgentino())
     ->getTrackingInfo($dataModel);
 ```
@@ -15,6 +17,8 @@ $api = (new CorreoArgentino())
 ### Models
 Nacional
 ```php
+use CorreoArgentinoApi\Models\Request\Nacional;
+
 $data = (new Nacional())
     ->setProductCode(Nacional::PRODUCTS['EE'])
     ->setShippingId(123456789)
@@ -25,16 +29,22 @@ $data = (new Nacional())
 ```
 Internacional
 ```php
+use CorreoArgentinoApi\Models\Request\Internacional;
+
 $data = (new Internacional())
     ->setShippingId("RB123456789AR");
 ```
 Ecommerce
 ```php
+use CorreoArgentinoApi\Models\Request\Ecommerce;
+
 $data = (new Ecommerce())
     ->setShippingNumber(string);
 ```
 Mercadolibre
 ```php
+use CorreoArgentinoApi\Models\Request\Mercadolibre;
+
 $data = (new Mercadolibre())
     ->setShippingNumber(string);
 ```
