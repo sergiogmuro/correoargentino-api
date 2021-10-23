@@ -1,13 +1,18 @@
 # Correo Argentino API
 Api para consultas en Correo Argentino basado en las consultas disponibles desde la app oficial
 
-## Make Request
+### Installation
+```shell
+composer require sergiomuro/correoargentino-api
+```
+
+### Make Request
 ```php
 $api = (new CorreoArgentino())
     ->getTrackingInfo($dataModel);
 ```
 -----
-## Models
+### Models
 Nacional
 ```php
 $data = (new Nacional())
