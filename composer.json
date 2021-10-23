@@ -16,7 +16,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "CorreoArgentinoApi\\": ""
+      "CorreoArgentinoApi\\": "src/CorreoArgentinoApi"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-main": "2.x-dev"
     }
   },
   "config": {
