@@ -1,8 +1,7 @@
 <?php
 
-namespace App\CorreoArgentinoApi;
+namespace CorreoArgentinoApi;
 
-use CorreoArgentinoApi\AbstractCorreoArgentino;
 use CorreoArgentinoApi\Models\Request\Ecommerce;
 use CorreoArgentinoApi\Models\Request\Internacional;
 use CorreoArgentinoApi\Models\Request\Mercadolibre;

@@ -8,7 +8,7 @@ composer require sergiomuro/correoargentino-api
 
 ### Make Request
 ```php
-use App\CorreoArgentinoApi\CorreoArgentino;
+use CorreoArgentinoApi\CorreoArgentino;
 
 $api = (new CorreoArgentino())
     ->getTrackingInfo($dataModel);

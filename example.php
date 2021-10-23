@@ -4,7 +4,7 @@
  */
 require_once "vendor/autoload.php";
 
-use App\CorreoArgentinoApi\CorreoArgentino;
+use CorreoArgentinoApi\CorreoArgentino;
 use CorreoArgentinoApi\Models\Request\Internacional;
 use CorreoArgentinoApi\Models\Request\Nacional;
 
