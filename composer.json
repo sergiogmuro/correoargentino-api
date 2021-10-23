@@ -1,12 +1,14 @@
 {
   "name": "sergiomuro/correoargentino-api",
+  "type": "library",
   "description": "API SDK for Correo Argentino",
   "require": {
     "php": ">=7.0",
     "ext-curl": "*"
   },
   "minimum-stability": "stable",
-  "license": "Sergio Muro",
+  "version": "0.1.1",
+  "license": "MIT",
   "authors": [
     {
       "name": "sergiomuro"
@@ -19,5 +21,6 @@
     "psr-4": {
       "CorreoArgentinoApi\\": "CorreoArgentinoAPI/"
     }
-  }
+  },
+  "prefer-stable": true
 }
