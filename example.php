@@ -1,13 +1,16 @@
 <?php
 /***
-    TEST
+ * TEST
  */
-require_once "vendor/autoload.php";
+require_once "src/CorreoArgentinoApi/Models/Request/RequestInterface.php";
+require_once "src/CorreoArgentinoApi/Models/Request/Nacional.php";
+require_once "src/CorreoArgentinoApi/Models/Request/Internacional.php";
+require_once "src/CorreoArgentinoApi/AbstractCorreoArgentino.php";
+require_once "src/CorreoArgentinoApi/CorreoArgentino.php";
 
 use CorreoArgentinoApi\CorreoArgentino;
 use CorreoArgentinoApi\Models\Request\Internacional;
 use CorreoArgentinoApi\Models\Request\Nacional;
-
 
 $co = new CorreoArgentino();
 $ship = (new Nacional())
