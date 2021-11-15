@@ -1,5 +1,6 @@
-# Correo Argentino API
+# Correo Argentino API Track & Trace & Epago
 Api para consultas en Correo Argentino basado en las consultas disponibles desde la app oficial
+Api para consultas y gestion en Correo Argentino plataforma epago
 
 ### Installation
 ```shell
@@ -8,9 +9,9 @@ composer require sergiomuro/correoargentino-api
 
 ### Make Request
 ```php
-use CorreoArgentinoApi\CorreoArgentino;
+use CorreoArgentinoApi\CorreoArgentinoTracking;
 
-$api = (new CorreoArgentino())
+$api = (new CorreoArgentinoTracking())
     ->getTrackingInfo($dataModel);
 ```
 -----

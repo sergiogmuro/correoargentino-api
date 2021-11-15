@@ -7,6 +7,7 @@ use Exception;
 class Nacional implements RequestInterface
 {
     const PRODUCTS = [
+        "CC" => "CC",
         "CD" => "CD",
         "CL" => "CL",
         "CM" => "CM",
@@ -28,13 +29,11 @@ class Nacional implements RequestInterface
         "IN" => "IN",
         "IS" => "IS",
         "JP" => "JP",
-        "ND" => "ND",
         "OL" => "OL",
         "PP" => "PP",
         "RD" => "RD",
         "RE" => "RE",
         "RR" => "RR",
-        "SD" => "SD",
         "SL" => "SL",
         "SP" => "SP",
         "SR" => "SR",

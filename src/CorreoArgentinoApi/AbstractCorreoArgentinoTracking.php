@@ -8,7 +8,7 @@ use CorreoArgentinoApi\Models\Request\Mercadolibre;
 use CorreoArgentinoApi\Models\Request\Nacional;
 use CorreoArgentinoApi\Models\Request\RequestInterface;
 
-abstract class AbstractCorreoArgentino
+abstract class AbstractCorreoArgentinoTracking
 {
     private static $API_HOST = 'https://api.correoargentino.com.ar';
     private static $API_BASE = '/backendappcorreo/api/api/shipping-tracking-';
@@ -18,13 +18,11 @@ abstract class AbstractCorreoArgentino
     private static $TRACK_ECOMMERCE = 'ec';
     private static $TRACK_MERCADOLIBRE = 'ml';
 
-    private function request(string $type, RequestInterface $data)
+    private function request(string $url, array $headers = [], string $method = 'GET', array $params = []): string
     {
-        $url = self::$API_HOST . self::$API_BASE . $type . '?' . http_build_query($data->get());
-
         $curl = curl_init();
 
-        curl_setopt_array($curl, array(
+        curl_setopt_array($curl, [
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
@@ -32,19 +30,29 @@ abstract class AbstractCorreoArgentino
             CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'User-Agent: User-Agent: Dalvik/2.1.0 (Linux; U; Android 6.0; Android SDK built for x86 Build/MASTER)',
-                'Host: api.correoargentino.com.ar'
-            ),
-        ));
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_POST => ($method == 'POST' ? 1 : 0),
+            CURLOPT_POSTFIELDS => json_encode($params),
+            CURLOPT_HTTPHEADER => $headers,
+        ]);
 
         $response = curl_exec($curl);
 
         curl_close($curl);
-        return json_decode(json_encode($response, true));
+        return json_decode(json_encode($response, true)) ?? '';
     }
 
+    private function getUrl(string $type): string
+    {
+        return self::$API_HOST . self::$API_BASE . $type;
+    }
+
+    private function requestTracking(string $url, RequestInterface $data): string
+    {
+        $url .= '?' . http_build_query($data->get());
+
+        return $this->request($url);
+    }
 
     /**
      * Get Nacional Track & Trace
@@ -55,7 +63,7 @@ abstract class AbstractCorreoArgentino
      */
     protected function getNacional(Nacional $data)
     {
-        return $this->request(self::$TRACK_NAC, $data);
+        return $this->requestTracking($this->getUrl(self::$TRACK_NAC), $data);
     }
 
     /**
@@ -67,7 +75,7 @@ abstract class AbstractCorreoArgentino
      */
     protected function getInternacional(Internacional $data)
     {
-        return $this->request(self::$TRACK_INTER_NAC, $data);
+        return $this->requestTracking($this->getUrl(self::$TRACK_INTER_NAC), $data);
     }
 
     /**
@@ -79,7 +87,7 @@ abstract class AbstractCorreoArgentino
      */
     protected function getEcommerce(Ecommerce $data)
     {
-        return $this->request(self::$TRACK_ECOMMERCE, $data);
+        return $this->requestTracking($this->getUrl(self::$TRACK_ECOMMERCE), $data);
     }
 
     /**
@@ -91,6 +99,6 @@ abstract class AbstractCorreoArgentino
      */
     protected function getMercadolibre(Mercadolibre $data)
     {
-        return $this->request(self::$TRACK_MERCADOLIBRE, $data);
+        return $this->requestTracking($this->getUrl(self::$TRACK_MERCADOLIBRE), $data);
     }
 }

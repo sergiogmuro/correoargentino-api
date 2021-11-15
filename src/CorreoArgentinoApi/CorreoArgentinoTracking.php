@@ -9,13 +9,13 @@ use CorreoArgentinoApi\Models\Request\Nacional;
 use CorreoArgentinoApi\Models\Request\RequestInterface;
 
 /**
- * Class CorreoArgentino
+ * Class CorreoArgentinoTracking
  *
  * API For Corre Argentino Tracking
  *
  * @package App\CorreoArgentinoApi
  */
-class CorreoArgentino extends AbstractCorreoArgentino
+class CorreoArgentinoTracking extends AbstractCorreoArgentinoTracking
 {
     public function getTrackingInfo(RequestInterface $data) {
         switch(get_class($data)) {
