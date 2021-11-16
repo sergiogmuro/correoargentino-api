@@ -1,6 +1,5 @@
-# Correo Argentino API Track & Trace & Epago
+# Correo Argentino API Track & Trace
 Api para consultas en Correo Argentino basado en las consultas disponibles desde la app oficial
-Api para consultas y gestion en Correo Argentino plataforma epago
 
 ### Installation
 ```shell
@@ -63,3 +62,10 @@ Make Request
 $api = (new CorreoArgentino())
     ->getTrackingInfo($data);
 ```
+
+----
+Ver tambien el proyecto [Epago](https://github.com/sergiogmuro/correoargentino-epago)
+
+> Usar bajo su propia responsabilidad.   
+> Teniendo en cuenta que este es un servicio gubernamiental y privado.   
+> El proyecto es de uso personal...
