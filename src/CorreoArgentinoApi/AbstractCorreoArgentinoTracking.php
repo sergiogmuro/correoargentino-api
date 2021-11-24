@@ -17,12 +17,19 @@ abstract class AbstractCorreoArgentinoTracking
     private static $TRACK_INTER_NAC = 'int-nac';
     private static $TRACK_ECOMMERCE = 'ec';
     private static $TRACK_MERCADOLIBRE = 'ml';
-
+    private static $API_USA_PROXY       = false;
+    private static $API_PROXY           = "";
+    private static $API_PROXY_PORT      = "";
+    public static function setProxy($proxy,$port) {
+        self::$API_USA_PROXY = true;
+        self::$API_PROXY = $proxy;
+        self::$API_PROXY_PORT = $port;
+    }
     private function request(string $url, array $headers = [], string $method = 'GET', array $params = []): string
     {
         $curl = curl_init();
 
-        curl_setopt_array($curl, [
+        $params_curl = [
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
@@ -33,15 +40,19 @@ abstract class AbstractCorreoArgentinoTracking
             CURLOPT_CUSTOMREQUEST => $method,
             CURLOPT_POST => ($method == 'POST' ? 1 : 0),
             CURLOPT_POSTFIELDS => json_encode($params),
-            CURLOPT_HTTPHEADER => $headers,
-        ]);
+            CURLOPT_HTTPHEADER => $headers
+        ];
+        if ( self::$API_USA_PROXY == true ) {
+            $params_curl[CURLOPT_PROXYPORT] = self::$API_PROXY_PORT;
+            $params_curl[CURLOPT_PROXY] =self::$API_PROXY;
 
+        }
+        curl_setopt_array($curl,$params_curl);
         $response = curl_exec($curl);
 
         curl_close($curl);
         return json_decode(json_encode($response, true)) ?? '';
     }
-
     private function getUrl(string $type): string
     {
         return self::$API_HOST . self::$API_BASE . $type;
