@@ -19,6 +19,7 @@ $ship = (new Nacional())
 print_r($co->getTrackingInfo($ship)); echo PHP_EOL;
 
 $ship = (new Nacional())
+    ->setIsPlus(false)
     ->setTrackingNumber("EE188151547AR");
 print_r($co->getTrackingInfo($ship)); echo PHP_EOL;
 

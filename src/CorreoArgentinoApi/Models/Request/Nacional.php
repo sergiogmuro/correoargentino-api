@@ -42,17 +42,25 @@ class Nacional implements RequestInterface
         "TL" => "TL",
         "UP" => "UP"
     ];
+    const PRODUCTS_PLUS = [
+        'CU' => 'CU',
+        'SU' => 'SU',
+        'EU' => 'EU',
+        'PU' => 'PU',
+    ];
     private static $LIMIT = 9;
+    private $isPlus = false;
     private $productCode = 'EE';
     private $shippingId = 0;
     private $destination = 'Nac';
+    private $destinationPlus = 'NacP';
 
     public function get(): array
     {
         return [
             'product_code' => $this->productCode,
             'id_shipping' => $this->shippingId,
-            'destination' => $this->destination
+            'destination' => $this->isPlus ? $this->destinationPlus : $this->destination
         ];
     }
 
@@ -85,10 +93,10 @@ class Nacional implements RequestInterface
     public function setProductCode(string $productCode): Nacional
     {
         $productCode = strtoupper($productCode);
-        if (empty(self::PRODUCTS[$productCode])) {
+        if (empty(self::PRODUCTS[$productCode]) && empty(self::PRODUCTS_PLUS[$productCode])) {
             throw new Exception('Product not exists');
         }
-        $this->productCode = self::PRODUCTS[$productCode];
+        $this->productCode = $productCode;
         return $this;
     }
 
@@ -116,9 +124,9 @@ class Nacional implements RequestInterface
      *
      * @return $this
      */
-    public function setIsPlus(bool $isPlus): Nacional
+    public function setIsPlus(bool $isPlus = true): Nacional
     {
-        $this->destination = $isPlus ? 'NacP' : $this->destination;
+        $this->isPlus = $isPlus;
         return $this;
     }
 }
